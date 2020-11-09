@@ -1,0 +1,260 @@
+@import 'scss/base';
+@import 'base';
+/* #ifndef APP-NVUE */
+view,
+text {
+	box-sizing: border-box;
+}
+/* #endif */
+page{
+	height: 100%;
+	background-color:#F5F5F5;
+}
+/* start--演示页面使用的统一样式--start */
+.u-demo {
+	padding: 50rpx 40rpx;
+}
+
+.u-demo-wrap {
+	border-width: 1px;
+	border-color: #ddd;
+	border-style: dashed;
+	background-color:#F5F5F5;
+	padding: 40rpx 20rpx;
+	border-radius: 6px;
+}
+
+.u-demo-area {
+	text-align: center;
+}
+
+.u-no-demo-here {
+	color: $u-tips-color;
+	font-size: 26rpx;
+}
+
+.u-demo-result-line {
+	border-width: 1px;
+	border-color: #ddd;
+	border-style: dashed;
+	padding: 10rpx 40rpx;
+	margin-top: 30rpx;
+	border-radius: 5px;
+	background-color: rgb(240, 240, 240);
+	color: $u-content-color;
+	font-size: 32rpx;
+	/* #ifndef APP-NVUE */
+	word-break: break-word;
+	display: inline-block;
+	/* #endif */
+	text-align: left;
+	
+}
+
+.u-demo-title,
+.u-config-title {
+	text-align: center;
+	font-size: 32rpx;
+	font-weight: bold;
+	margin-bottom: 40rpx;
+}
+
+.u-config-item {
+	margin-top: 50rpx;
+}
+
+.u-config-title {
+	margin-top: 40rpx;
+	padding-bottom: 10rpx;
+}
+
+.u-item-title {
+	position: relative;
+	font-size: 28rpx;
+	padding-left: 8px;
+	line-height: 1;
+	margin-bottom: 22rpx;
+}
+
+.u-item-title:after {
+	position: absolute;
+	width: 4px;
+	top: -1px;
+	height: 16px;
+	/* #ifndef APP-NVUE */
+	content: '';
+	/* #endif */
+	left: 0;
+	border-radius: 10px;
+	background-color: $u-content-color;
+}
+.index-app-content{
+  padding-bottom: calc(var(--window-bottom) + 20px);
+}
+.u-search-popup {
+	height: 100%;
+	padding: 24rpx;
+	text-align: center;
+	position: relative;
+	.scroll-view{
+		height: calc(100% - 98upx);
+	}
+	.u-popup-bottom{
+		display: flex;
+		width: 100%;
+		height:98upx;
+		align-items: center;
+		justify-content: space-between;
+		border-top: 1px solid #F5F5F5;
+		.u-default-btn .u-btn{
+			background: #F5F5F5;
+			color: #666666;
+			border: none;
+		}
+		.u-popup-button .u-btn{
+			width: 280upx;
+			border-radius: 4px;
+			line-height: 66upx;
+			height: 66upx;
+			flex-grow: 1;
+		}
+	}
+}
+
+.search-form{
+	.u-form-title {
+		font-size: 16px;
+		font-weight: 400;
+		color: #000000;
+		line-height: 1;
+		border-left: 2px solid #FF5948;
+		padding-left: 8upx;
+		white-space: nowrap;
+		display: inline-block;
+		display: flex;
+		align-items: center;
+	}
+	.u-form-item__body{
+		width: 100%;
+	}
+	.u-form-item {
+		width: 100%;
+		display: flex;
+		align-items: baseline;
+	}
+	.u-form-content {
+		font-size: 26upx;
+		display: inline-block;
+		padding: 10upx 20upx;
+		flex: 1;
+		color: #999999;
+		text-align: right;
+	}
+	
+}
+.keyword-block {
+	padding: 10upx 0;
+	 .keyword-list-header {
+		width: 100%;
+		padding: 10upx 3%;
+		font-size: 27upx;
+		color: #333;
+		display: flex;
+		justify-content: space-between;
+	}
+	
+	 .keyword-list-header image {
+		width: 44upx;
+		height: 44upx;
+	}
+
+	.keyword {
+		width: 100%;
+		padding: 3px 3%;
+		display: flex;
+		flex-flow: wrap;
+		justify-content: flex-start;
+		.swCheck.isChecked {
+		  border: 1px solid #FF5948;
+		}
+		.swCheck {
+			display: flex!important;
+			justify-content: center;
+			align-items: center;
+			border-radius: 8upx;
+			padding: 0 32upx;
+			height: 64upx;
+			margin: 10upx 20upx 10upx 0;
+			font-size: 24upx;
+			background: #F5F5F5;
+			color: #666666;
+			cursor: pointer;
+			 position: relative;
+			 display: inline-block;
+			 border: 1px solid transparent;
+			 .checkbox__label{
+			 	width: 100%;
+			 	height: 100%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			 }
+			.checkbox__original{
+			  width: 100%;
+			  height: 100%;
+			  opacity: 0;
+			  outline: none;
+			  position: absolute;
+			  left: 0;
+			  top: 0;
+			}
+			.u-icon{
+				position: absolute;
+				right: 0;
+				top: 0;
+				transform: translate(50%,-50%);
+			}
+		}
+	}
+	.keyword-checkbox{
+		padding: 3px 0px!important;;
+		.swCheck:nth-child(3n+3) {
+			 margin-right: 0;
+		}
+		.swCheck{
+			width: 180upx;
+			height: 68upx;
+			padding: 0 29rpx!important;
+			.swCheck-area{
+				 width: 100%;
+				 height: 100%;
+			}
+			
+			.checkbox__count{
+				 color: #999999;
+				 line-height: 14px;
+				 font-size: 20upx;
+			}
+			.checkbox__label{
+				flex-direction: column;
+			}
+		}
+	}
+}
+.my-dropdown {
+	 .swCheck {
+		padding: 0 25rpx !important;
+		width: 31.4% !important;
+	}
+	.tax{
+		background: #fff;
+		height: 100%;
+		width: 100%;
+		 .u-popup-button .u-btn {
+			width: 330upx !important;
+		}
+	}
+	
+}
+
+/* end--演示页面使用的统一样式--end */
