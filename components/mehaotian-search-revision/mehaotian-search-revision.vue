@@ -9,22 +9,31 @@
 				 :class="{'center':!active && mode === 2}" :focus="isFocus" v-model="inputVal" @focus="focus" @blur="blur" />
 				<!-- <view v-if="!active && mode === 2" class="input sub" @click="getFocus">请输入搜索内容</view> -->
 				<!-- HM修改 @click换成@click.stop阻止冒泡 -->
+				<text v-if="findPage" class="icon" >0/0</text>
 				<text v-if="isDelShow" class="icon icon-del" @click.stop="clear"></text>
 			</view>
-			<view v-show="(active&&show&&button === 'inside')||(isDelShow && button === 'inside')" class="serachBtn" @click="search">
-				搜索
+			<template v-if = "!findPage">
+				<view v-show="(active&&show&&button === 'inside')||(isDelShow && button === 'inside')" class="serachBtn" @click="search">
+					搜索
+				</view>
+			</template>
+			
+		</view>
+		<template v-if = "!findPage">
+			<view v-if="button === 'outside'" class="button" :class="{'active':show||active}" @click="search">
+				<view class="button-item">{{!show?searchName:'搜索'}}</view>
 			</view>
-		</view>
-
-		<view v-if="button === 'outside'" class="button" :class="{'active':show||active}" @click="search">
-			<view class="button-item">{{!show?searchName:'搜索'}}</view>
-		</view>
+		</template>
 	</view>
 </template>
 
 <script>
 	export default {
 		props: {
+			findPage:{
+				value:Boolean,
+				default:false
+			},
 			mode: {
 				value: Number,
 				default: 1
@@ -69,7 +78,7 @@
 			inputChange(event) {
 				var keyword = event.detail.value;
 				this.$emit('input', keyword);
-				if (this.inputVal) {
+				if (this.inputVal&&!this.findPage) {
 					this.isDelShow = true;
 				}
 			},

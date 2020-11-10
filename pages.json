@@ -51,8 +51,8 @@
 				"navigationBarTitleText": "表单",
 				"navigationBarBackgroundColor": "#FFFFFF"
 			}
-		}
-	    ,{
+		},
+	    {
             "path" : "pages/articles/index",
             "style" :                                                                                    
             {

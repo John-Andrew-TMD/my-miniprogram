@@ -16,7 +16,7 @@
       class="main"
       :style="{ height: `calc(100vh - ${70 + tipHeight}px)` }"
       @scrolltolower="onreachBottom"
-	  :lower-threshold = "20"
+	  :lower-threshold = "30"
       refresher-enabled="true"
       :refresher-triggered="triggered"
       :refresher-threshold="100"

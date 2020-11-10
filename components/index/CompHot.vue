@@ -34,31 +34,38 @@
 				tableOptions: {
 					requestUrl: false,
 					listData: [{
+							id:"185812",
 							content: "1关于继续实施全国中小企业股份转让系统挂牌公司股息红利差别化个人所得税政策",
 							detail: "发改办财规 [2019] 860号",
 							timestamp: Date.parse(new Date())
 						}, {
+							id:"185812",
 							content: "1关于继续实施全国中小企业股份转让系统挂牌公司股息红利差别化个人所得税政策",
 							detail: "发改办财规 [2019] 860号",
 							timestamp: Date.parse(new Date())
 						}, {
+							id:"185812",
 							content: "1关于继续实施全国中小企业股份转让系统挂牌公司股息红利差别化个人所得税政策",
 							detail: "发改办财规 [2019] 860号",
 							timestamp: Date.parse(new Date())
 						}, {
+							id:"185812",
 							content: "1关于继续实施全国中小企业股份转让系统挂牌公司股息红利差别化个人所得税政策",
 							detail: "发改办财规 [2019] 860号",
 							timestamp: Date.parse(new Date())
 						}, {
+							id:"185812",
 							content: "1关于继续实施全国中小企业股份转让系统挂牌公司股息红利差别化个人所得税政策",
 							detail: "发改办财规 [2019] 860号",
 							timestamp: Date.parse(new Date())
 						}, {
+							id:"185812",
 							content: "1关于继续实施全国中小企业股份转让系统挂牌公司股息红利差别化个人所得税政策",
 							detail: "发改办财规 [2019] 860号",
 							timestamp: Date.parse(new Date())
 						},
 						{
+							id:"185812",
 							content: "2关于继续实施全国中小企业股份转让系统挂牌公司股息红利差别化个人所得税政策",
 							detail: "发改办财规 [2019] 860号",
 							timestamp: Date.parse(new Date())

@@ -9,11 +9,7 @@
 						</scroll-view>
 						<view class="u-popup-bottom">
 							<u-button class="u-popup-button u-default-btn" :hair-line="false" @click="handleResetClick">重置</u-button>
-							<u-button class="u-popup-button" type="error" @click="handlePopupClick">确定<span>({{
-                    item
-                      .map(el => el.count)
-                      .reduce((prev, cur) => prev + cur, 0)
-                  }}条)</span></u-button>
+							<u-button class="u-popup-button" type="error" @click="handlePopupClick">确定<span>({{getCheckedBox(item)}}条)</span></u-button>
 						</view>
 					</view>
 				</u-dropdown-item>
@@ -91,6 +87,11 @@
 		},
 		methods: {
 			init() {},
+			getCheckedBox(item){
+				item
+				  .map(el => el.count)
+				  .reduce((prev, cur) => prev + cur, 0)
+			},
 			showUviewPicker(e) {
 				this.visiabled = true
 			},
