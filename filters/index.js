@@ -2,8 +2,10 @@ import {
   dateFormatBySeparator,
   timestampFormat,
   thousandSeparator,
-  decimalsFormat
-} from 'utils'
+  decimalsFormat,
+  queryDictValue,
+  queryDictValueByKey
+} from '@/utils'
 
 /**
  * Show plural label if time is plural number
@@ -112,6 +114,9 @@ export function filterDigitDecimals(num, minDecimals, maxDecimals, defaultVal) {
  * @param {string} objKey 字典项key
  * @param {sttring} functionId 功能号
  */
+export function filterDictValueBykey(objKey, functionId) {
+  return queryDictValueByKey(functionId, objKey)
+}
 export function filterDictValue(objKey, functionId) {
   return queryDictValue(functionId, objKey)
 }

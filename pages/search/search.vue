@@ -2,8 +2,8 @@
 	<view class="content search-form">
 		<view class="search-box">
 			<!-- mSearch组件 如果使用原样式，删除组件元素-->
-			<mSearch class="mSearch-input-box" :mode="2"  :placeholder="defaultKeyword" @search="doSearch(false)"
-			 @input="inputChange" @confirm="doSearch(false)" v-model="keyword"></mSearch>
+			<m-search class="mSearch-input-box" :mode="2"  :placeholder="defaultKeyword" @search="doSearch(false)"
+			 @input="inputChange" @confirm="doSearch(false)" v-model="keyword"></m-search>
 			<!-- 原样式 如果使用原样式，恢复下方注销代码 -->
 			<!-- 						
 			<view class="input-box">
@@ -42,9 +42,9 @@
 						</view>
 					</view>
 					<view class="keyword">
-						<view class = "swCheck" v-for="(keyword,index) in oldKeywordList"  :key="index">
-							<u-icon @click.stop="handleDelItem(index)" class = "u-icon" name="close-circle-fill" color="#CCCCCC" size="28"></u-icon>
-							<view class="swCheck-area" @tap="doSearch(keyword)">
+						<view class = "swCheck" v-for="(keyword,index) in oldKeywordList"  :key="index"  @click.self="doSearch(keyword)">
+							<u-icon @click.stop.native="handleDelItem(keyword,index)" class = "u-icon-close" name="close-circle-fill" color="#CCCCCC" size="28"></u-icon>
+							<view class="swCheck-area">
 								{{keyword}}
 							</view>
 						</view>
@@ -155,7 +155,8 @@
 					}
 				});
 			},
-			handleDelItem(index){
+			handleDelItem(keyword,index){
+				console.log(1)
 				uni.getStorage({
 					key: 'OldKeys',
 					success: (res) => {
@@ -167,6 +168,7 @@
 							data: JSON.stringify(OldKeys)
 						});
 						this.oldKeywordList = OldKeys; //更新历史搜索
+						// this.doSearch(keyword)
 					}
 				});
 			},

@@ -5,7 +5,7 @@
 				<view class="u-form-title" >
 					税种范围
 				</view>
-				<checked-box ref = "checkedBox" :options="options" :taxTagStats.sync="taxTagStats"></checked-box>
+				<checked-box ref = "checkedBox" :options="options" :check-box-value.sync="taxTagStats"></checked-box>
 			</scroll-view>
 			
 			<view class="u-popup-bottom">
@@ -51,7 +51,7 @@
 				this.$emit("update:changeIsShow", false)
 			},
 			handlePopupClick(e) {
-				this.$emit("update:taxTagStats",this.taxTagStats)
+				this.$emit("update:check-box-value",this.taxTagStats)
 				this.$emit("update:changeIsShow", false)
 			},
 			handleResetClick(){

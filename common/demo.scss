@@ -91,6 +91,11 @@ page{
 .index-app-content{
   padding-bottom: calc(var(--window-bottom) + 20px);
 }
+.u-dropdown{
+	.u-popup-bottom{
+		padding: 0 20rpx;
+	}
+}
 .u-search-popup {
 	height: 100%;
 	padding: 24rpx;
@@ -106,6 +111,7 @@ page{
 		align-items: center;
 		justify-content: space-between;
 		border-top: 1px solid #F5F5F5;
+		 // padding: 0 20rpx;
 		.u-default-btn .u-btn{
 			background: #F5F5F5;
 			color: #666666;
@@ -129,6 +135,15 @@ page{
 		line-height: 1;
 		border-left: 2px solid #FF5948;
 		padding-left: 8upx;
+		white-space: nowrap;
+		display: inline-block;
+		display: flex;
+		align-items: center;
+	}
+	.u-tree-title{
+		font-size: 28rpx;
+		color: #333333;
+		line-height: 40rpx;
 		white-space: nowrap;
 		display: inline-block;
 		display: flex;
@@ -198,6 +213,7 @@ page{
 				display: flex;
 				justify-content: center;
 				align-items: center;
+				
 			 }
 			.checkbox__original{
 			  width: 100%;
@@ -208,7 +224,7 @@ page{
 			  left: 0;
 			  top: 0;
 			}
-			.u-icon{
+			.u-icon-close{
 				position: absolute;
 				right: 0;
 				top: 0;
@@ -241,19 +257,21 @@ page{
 		}
 	}
 }
-.my-dropdown {
+.u-dropdown {
 	 .swCheck {
 		padding: 0 25rpx !important;
 		width: 31.4% !important;
 	}
-	.tax{
-		background: #fff;
-		height: 100%;
-		width: 100%;
-		 .u-popup-button .u-btn {
+	// .tax{
+	// 	background: #fff;
+	// 	height: 100%;
+	// 	width: 100%;
+	.u-popup-bottom{
+		.u-popup-button .u-btn {
 			width: 330upx !important;
 		}
 	}
+	// }
 	
 }
 .app-zhiding{
@@ -263,5 +281,29 @@ page{
 	width: 64upx;
 	height: 64upx;
 	border-radius: 100%;
+}
+.app-list {
+	width: 100%;
+	padding: 30rpx 0;
+	border-bottom: 1px solid #dddddd;
+
+	.list-row {
+		display: flex;
+		font-size: 24rpx;
+		font-weight: 400;
+		line-height: 44rpx;
+
+		.list-label {
+			width: 120rpx;
+			text-align: right;
+			color: #999999;
+		}
+
+		.list-content {
+			flex: 1;
+			color: #333333;
+			margin-left: 10rpx;
+		}
+	}
 }
 /* end--演示页面使用的统一样式--end */

@@ -145,7 +145,7 @@
 	};
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	.serach {
 		display: flex;
 		width: 100%;

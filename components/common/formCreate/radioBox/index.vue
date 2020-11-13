@@ -7,9 +7,7 @@
 					<br/>
 					<span class = "checkbox__count" v-if = "showCount">（{{item.count}}条）</span>
 				</span>
-				<view class="checkbox__original"  @click="onClick(item,index)" :id="item.code">
-					
-				</view>
+				<input class="checkbox__original" type="checkbox" @click="onClick(item,index)" :id="item.code" />
 			</view>
 		</view>
 		
@@ -24,10 +22,6 @@
 			onlyCode:{
 				type:Boolean,
 				default:false
-			},
-			optionsKey:{
-				type:String,
-				default:""
 			},
 			options:{
 				type:Array,
@@ -45,22 +39,18 @@
 			}
 		},
 		mounted(){
-			this.arr = this.options.map(item => {
-				return { ...item,
-					key: `${item.name}---${item.code}`
-				}
-			})
+			this.arr = this.options
 		},
 		methods: {
 			onClick(item,index) {
+				this.handleResetClick()
 				this.$set(this.arr, index,  {...item,isChecked:!item.isChecked})
 				let itemChecked = this.arr.filter((item)=>item.isChecked)
 				if(this.onlyCode){
-					this.$emit('update:check-box-value', itemChecked.map(item => item.code))
+					this.$emit('update:check-box-value', itemChecked.map(item => item.code)[0])
 				}else{
-					this.$emit('update:check-box-value', itemChecked)
+					this.$emit('update:check-box-value', itemChecked[0])
 				}
-				this.$emit('callback',{item:this.arr,key:this.optionsKey})
 			},
 			handleResetClick(){
 				this.arr.forEach((item)=>{
@@ -68,19 +58,14 @@
 				})
 				let itemChecked = this.arr.filter((item)=>item.isChecked)
 				if(this.onlyCode){
-					this.$emit('update:check-box-value', itemChecked.map(item => item.code))
+					this.$emit('update:check-box-value','')
 				}else{
-					this.$emit('update:check-box-value', itemChecked)
+					this.$emit('update:check-box-value',{})
 				}
-				this.$emit('callback',{item:this.arr,key:this.optionsKey})
 			}
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
-	.checkbox__original{
-		opacity: 0;
-		cursor: pointer;
-	}
 </style>

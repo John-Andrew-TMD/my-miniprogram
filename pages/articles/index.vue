@@ -302,29 +302,6 @@
 			}
 		}
 
-		.app-list {
-			width: 100%;
-			padding: 30rpx 0;
-			border-bottom: 1px solid #dddddd;
-
-			.list-row {
-				display: flex;
-				font-size: 24rpx;
-				font-weight: 400;
-				line-height: 44rpx;
-
-				.list-label {
-					width: 120rpx;
-					text-align: right;
-					color: #999999;
-				}
-
-				.list-content {
-					flex: 1;
-					color: #333333;
-					margin-left: 10rpx;
-				}
-			}
-		}
+		
 	}
 </style>

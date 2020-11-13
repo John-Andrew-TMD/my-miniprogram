@@ -31,7 +31,7 @@
 				"navigationBarTitleText": "搜索",
 				"navigationBarBackgroundColor": "#FFFFFF"
 			},
-			"app-plus":{
+			"app-plus": {
 				"softinputNavBar": "none"
 			}
 		},
@@ -52,32 +52,33 @@
 				"navigationBarBackgroundColor": "#FFFFFF"
 			}
 		},
-	    {
-            "path" : "pages/articles/index",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "文章详情",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
-	"subPackages": [
 		{
-			"root": "pagesA",
-			"pages": [{
-					"path": "list/list",
-					"style": {
-						"navigationBarTitleText": "表单",
-						"navigationBarBackgroundColor": "#FFFFFF"
-					}
-			}]
+			"path": "pages/articles/index",
+			"style": {
+				"navigationBarTitleText": "文章详情",
+				"enablePullDownRefresh": false
+			}
+
+		}
+	],
+	"subPackages": [{
+		"root": "pagesA",
+		"pages": [{
+			"path": "list/list",
+			"style": {
+				"navigationBarTitleText": "表单",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		}]
 	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F5F5F5"
+		"backgroundColor": "#F5F5F5",
+		"usingComponents": {
+			"ly-tree-node": "/components/ly-tree/ly-tree-node"
+		}
 	},
 	"tabBar": {
 		"color": "#BBB",

@@ -66,7 +66,7 @@
 		  :isShow = "isShow" 
 		  :keyList = "keyList"
 		  :options="filterlist.taxFilterData" 
-		  :taxTagStats.sync="form.taxTags"
+		  :check-box-value.sync="form.taxTags"
 		  v-else-if="componentName=='uPopup'" 
 		  :changeIsShow.sync = "isShow"></popur-search>
 	</view>

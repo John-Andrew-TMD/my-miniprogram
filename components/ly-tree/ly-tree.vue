@@ -35,7 +35,6 @@
 	import TreeStore from './model/tree-store.js';
 	import {getNodeKey} from './tool/util.js';
 	import LyTreeNode from './ly-tree-node.vue';
-
 	export default {
 		name: 'LyTree',
 		

@@ -5,7 +5,7 @@ import home from '@/store/modules/home.js'
 import mine from '@/store/modules/mine.js'
 import login from '@/store/modules/login.js'
 import createPersistedState from 'vuex-persistedstate'
-
+import getters from './getters'
 Vue.use(Vuex)
 
 const vuexPersisted = new createPersistedState({
@@ -22,6 +22,7 @@ const store = new Vuex.Store({
     	mine,
 		login
     },
+	getters,
     plugins:[vuexPersisted]
 })
 

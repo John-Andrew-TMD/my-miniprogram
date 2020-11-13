@@ -1,7 +1,8 @@
 // import aes from '../../public/plugins/aes.js'
 import dayjs from 'moment'
+import store from '@/store'
 import {
-  Decimal
+	Decimal
 } from 'decimal.js'
 let returnedItem = {}
 
@@ -13,43 +14,43 @@ let returnedItem = {}
  */
 
 export function parseTime(time, cFormat) {
-  if (arguments.length === 0) {
-    return null
-  }
-  const format = cFormat || '{y}-{m}-{d} {h}:{i}:{s}'
-  let date
-  if (typeof time === 'object') {
-    date = time
-  } else {
-    if ((typeof time === 'string') && (/^[0-9]+$/.test(time))) {
-      time = parseInt(time)
-    }
-    if ((typeof time === 'number') && (time.toString().length === 10)) {
-      time = time * 1000
-    }
-    date = new Date(time)
-  }
-  const formatObj = {
-    y: date.getFullYear(),
-    m: date.getMonth() + 1,
-    d: date.getDate(),
-    h: date.getHours(),
-    i: date.getMinutes(),
-    s: date.getSeconds(),
-    a: date.getDay()
-  }
-  const time_str = format.replace(/{(y|m|d|h|i|s|a)+}/g, (result, key) => {
-    let value = formatObj[key]
-    // Note: getDay() returns 0 on Sunday
-    if (key === 'a') {
-      return ['日', '一', '二', '三', '四', '五', '六'][value]
-    }
-    if (result.length > 0 && value < 10) {
-      value = '0' + value
-    }
-    return value || 0
-  })
-  return time_str
+	if (arguments.length === 0) {
+		return null
+	}
+	const format = cFormat || '{y}-{m}-{d} {h}:{i}:{s}'
+	let date
+	if (typeof time === 'object') {
+		date = time
+	} else {
+		if ((typeof time === 'string') && (/^[0-9]+$/.test(time))) {
+			time = parseInt(time)
+		}
+		if ((typeof time === 'number') && (time.toString().length === 10)) {
+			time = time * 1000
+		}
+		date = new Date(time)
+	}
+	const formatObj = {
+		y: date.getFullYear(),
+		m: date.getMonth() + 1,
+		d: date.getDate(),
+		h: date.getHours(),
+		i: date.getMinutes(),
+		s: date.getSeconds(),
+		a: date.getDay()
+	}
+	const time_str = format.replace(/{(y|m|d|h|i|s|a)+}/g, (result, key) => {
+		let value = formatObj[key]
+		// Note: getDay() returns 0 on Sunday
+		if (key === 'a') {
+			return ['日', '一', '二', '三', '四', '五', '六'][value]
+		}
+		if (result.length > 0 && value < 10) {
+			value = '0' + value
+		}
+		return value || 0
+	})
+	return time_str
 }
 
 /**
@@ -58,41 +59,41 @@ export function parseTime(time, cFormat) {
  * @returns {string}
  */
 export function formatTime(time, option) {
-  if (('' + time).length === 10) {
-    time = parseInt(time) * 1000
-  } else {
-    time = +time
-  }
-  const d = new Date(time)
-  const now = Date.now()
+	if (('' + time).length === 10) {
+		time = parseInt(time) * 1000
+	} else {
+		time = +time
+	}
+	const d = new Date(time)
+	const now = Date.now()
 
-  const diff = (now - d) / 1000
+	const diff = (now - d) / 1000
 
-  if (diff < 30) {
-    return '刚刚'
-  } else if (diff < 3600) {
-    // less 1 hour
-    return Math.ceil(diff / 60) + '分钟前'
-  } else if (diff < 3600 * 24) {
-    return Math.ceil(diff / 3600) + '小时前'
-  } else if (diff < 3600 * 24 * 2) {
-    return '1天前'
-  }
-  if (option) {
-    return parseTime(time, option)
-  } else {
-    return (
-      d.getMonth() +
-      1 +
-      '月' +
-      d.getDate() +
-      '日' +
-      d.getHours() +
-      '时' +
-      d.getMinutes() +
-      '分'
-    )
-  }
+	if (diff < 30) {
+		return '刚刚'
+	} else if (diff < 3600) {
+		// less 1 hour
+		return Math.ceil(diff / 60) + '分钟前'
+	} else if (diff < 3600 * 24) {
+		return Math.ceil(diff / 3600) + '小时前'
+	} else if (diff < 3600 * 24 * 2) {
+		return '1天前'
+	}
+	if (option) {
+		return parseTime(time, option)
+	} else {
+		return (
+			d.getMonth() +
+			1 +
+			'月' +
+			d.getDate() +
+			'日' +
+			d.getHours() +
+			'时' +
+			d.getMinutes() +
+			'分'
+		)
+	}
 }
 
 /**
@@ -100,15 +101,15 @@ export function formatTime(time, option) {
  * @returns {number} output value
  */
 export function byteLength(str) {
-  // returns the byte length of an utf8 string
-  let s = str.length
-  for (var i = str.length - 1; i >= 0; i--) {
-    const code = str.charCodeAt(i)
-    if (code > 0x7f && code <= 0x7ff) s++
-    else if (code > 0x7ff && code <= 0xffff) s += 2
-    if (code >= 0xDC00 && code <= 0xDFFF) i--
-  }
-  return s
+	// returns the byte length of an utf8 string
+	let s = str.length
+	for (var i = str.length - 1; i >= 0; i--) {
+		const code = str.charCodeAt(i)
+		if (code > 0x7f && code <= 0x7ff) s++
+		else if (code > 0x7ff && code <= 0xffff) s += 2
+		if (code >= 0xDC00 && code <= 0xDFFF) i--
+	}
+	return s
 }
 
 /**
@@ -116,13 +117,13 @@ export function byteLength(str) {
  * @returns {Array}
  */
 export function param(json) {
-  if (!json) return ''
-  return cleanArray(
-    Object.keys(json).map(key => {
-      if (json[key] === undefined) return ''
-      return encodeURIComponent(key) + '=' + encodeURIComponent(json[key])
-    })
-  ).join('&')
+	if (!json) return ''
+	return cleanArray(
+		Object.keys(json).map(key => {
+			if (json[key] === undefined) return ''
+			return encodeURIComponent(key) + '=' + encodeURIComponent(json[key])
+		})
+	).join('&')
 }
 
 /**
@@ -130,7 +131,7 @@ export function param(json) {
  * @param {Object} obj
  */
 export const objToUrl = obj => {
-  return Object.keys(obj).map(key => `${key}=${obj[key] && encodeURIComponent(obj[key]) || ''}`).join('&')
+	return Object.keys(obj).map(key => `${key}=${obj[key] && encodeURIComponent(obj[key]) || ''}`).join('&')
 }
 
 /**
@@ -138,15 +139,15 @@ export const objToUrl = obj => {
  * @param {String} str 路径
  */
 export const urlToObj = (str = location.href) => {
-  const obj = {}
-  const idx = str.indexOf('?')
-  if (idx > -1) {
-    str = str.substring(idx + 1)
-  }
-  str.replace(/([^=&]+)=([^&]*)/g, function(m, key, value) {
-    obj[key] = decodeURIComponent(value)
-  })
-  return obj
+	const obj = {}
+	const idx = str.indexOf('?')
+	if (idx > -1) {
+		str = str.substring(idx + 1)
+	}
+	str.replace(/([^=&]+)=([^&]*)/g, function(m, key, value) {
+		obj[key] = decodeURIComponent(value)
+	})
+	return obj
 }
 
 /**
@@ -154,9 +155,9 @@ export const urlToObj = (str = location.href) => {
  * @returns {string}
  */
 export function html2Text(val) {
-  const div = document.createElement('div')
-  div.innerHTML = val
-  return div.textContent || div.innerText
+	const div = document.createElement('div')
+	div.innerHTML = val
+	return div.textContent || div.innerText
 }
 
 /**
@@ -164,11 +165,11 @@ export function html2Text(val) {
  * @returns {Date}
  */
 export function getTime(type) {
-  if (type === 'start') {
-    return new Date().getTime() - 3600 * 1000 * 24 * 90
-  } else {
-    return new Date(new Date().toDateString())
-  }
+	if (type === 'start') {
+		return new Date().getTime() - 3600 * 1000 * 24 * 90
+	} else {
+		return new Date(new Date().toDateString())
+	}
 }
 
 /**
@@ -178,38 +179,38 @@ export function getTime(type) {
  * @return {*}
  */
 export function debounce(func, wait, immediate) {
-  let timeout, args, context, timestamp, result
+	let timeout, args, context, timestamp, result
 
-  const later = function() {
-    // 据上一次触发时间间隔
-    const last = +new Date() - timestamp
+	const later = function() {
+		// 据上一次触发时间间隔
+		const last = +new Date() - timestamp
 
-    // 上次被包装函数被调用时间间隔 last 小于设定时间间隔 wait
-    if (last < wait && last > 0) {
-      timeout = setTimeout(later, wait - last)
-    } else {
-      timeout = null
-      // 如果设定为immediate===true，因为开始边界已经调用过了此处无需调用
-      if (!immediate) {
-        result = func.apply(context, args)
-        if (!timeout) context = args = null
-      }
-    }
-  }
+		// 上次被包装函数被调用时间间隔 last 小于设定时间间隔 wait
+		if (last < wait && last > 0) {
+			timeout = setTimeout(later, wait - last)
+		} else {
+			timeout = null
+			// 如果设定为immediate===true，因为开始边界已经调用过了此处无需调用
+			if (!immediate) {
+				result = func.apply(context, args)
+				if (!timeout) context = args = null
+			}
+		}
+	}
 
-  return function(...args) {
-    context = this
-    timestamp = +new Date()
-    const callNow = immediate && !timeout
-    // 如果延时不存在，重新设定延时
-    if (!timeout) timeout = setTimeout(later, wait)
-    if (callNow) {
-      result = func.apply(context, args)
-      context = args = null
-    }
+	return function(...args) {
+		context = this
+		timestamp = +new Date()
+		const callNow = immediate && !timeout
+		// 如果延时不存在，重新设定延时
+		if (!timeout) timeout = setTimeout(later, wait)
+		if (callNow) {
+			result = func.apply(context, args)
+			context = args = null
+		}
 
-    return result
-  }
+		return result
+	}
 }
 
 /**
@@ -217,16 +218,16 @@ export function debounce(func, wait, immediate) {
  * @returns {Array}
  */
 export function uniqueArr(arr) {
-  return Array.from(new Set(arr))
+	return Array.from(new Set(arr))
 }
 
 /**
  * @returns {string}
  */
 export function createUniqueString() {
-  const timestamp = +new Date() + ''
-  const randomNum = parseInt((1 + Math.random()) * 65536) + ''
-  return (+(randomNum + timestamp)).toString(32)
+	const timestamp = +new Date() + ''
+	const randomNum = parseInt((1 + Math.random()) * 65536) + ''
+	return (+(randomNum + timestamp)).toString(32)
 }
 
 /**
@@ -234,28 +235,28 @@ export function createUniqueString() {
  */
 /* 存储localStorage */
 export const setStore = (name, content, type = 'localStorage') => {
-  if (!name) return
-  if (typeof content !== 'string') {
-    content = JSON.stringify(content)
-  }
-  window[type] && window[type].setItem(name, content)
+	if (!name) return
+	if (typeof content !== 'string') {
+		content = JSON.stringify(content)
+	}
+	window[type] && window[type].setItem(name, content)
 }
 /* 获取localStorage */
 export const getStore = (name, parse = false, type = 'localStorage') => {
-  if (!name) return
-  try {
-    if (parse) {
-      return window[type] && JSON.parse(window[type].getItem(name))
-    }
-  } catch (e) {
-    return
-  }
-  return window[type] && window[type].getItem(name)
+	if (!name) return
+	try {
+		if (parse) {
+			return window[type] && JSON.parse(window[type].getItem(name))
+		}
+	} catch (e) {
+		return
+	}
+	return window[type] && window[type].getItem(name)
 }
 /* 删除localStorage */
 export const removeStore = (name, type = 'localStorage') => {
-  if (!name) return
-  window[type] && window[type].removeItem(name)
+	if (!name) return
+	window[type] && window[type].removeItem(name)
 }
 
 
@@ -264,9 +265,9 @@ export const removeStore = (name, type = 'localStorage') => {
  * @param {every} val
  */
 export const isEmpty = val => {
-  if (val === 0) return false
-  if (!val) return true
-  return !!/^\s*$/.test(val)
+	if (val === 0) return false
+	if (!val) return true
+	return !!/^\s*$/.test(val)
 }
 
 /**
@@ -275,13 +276,13 @@ export const isEmpty = val => {
  * @returns {boolean}
  */
 export const isEmptyObj = (obj) => {
-  if (Object.prototype.toString.call(obj) !== '[object Object]') {
-    return true
-  } else if (!Object.keys(obj).length) {
-    return true
-  } else {
-    return false
-  }
+	if (Object.prototype.toString.call(obj) !== '[object Object]') {
+		return true
+	} else if (!Object.keys(obj).length) {
+		return true
+	} else {
+		return false
+	}
 }
 
 /**
@@ -292,36 +293,36 @@ export const isEmptyObj = (obj) => {
  * @param {string} parentKey 父节点id字段名称
  */
 export const generateTree = (data, parentId = 0, childrenKey, parentKey, orderKey = '') =>
-  data
-    .filter(item => item[parentKey] === parentId)
-    .map(item => {
-      let children = generateTree(data, item[childrenKey], childrenKey, parentKey, orderKey)
-      if (orderKey !== '') {
-        children = children.sort((a, b) => (a[orderKey] || 0) - (b[orderKey] || 0))
-      }
-      return {
-        ...item,
-        ...children.length && {
-          children
-        }
-      }
-    }).sort((a, b) => (orderKey !== '' ? ((a[orderKey] || 0) - (b[orderKey] || 0)) : 0))
+	data
+	.filter(item => item[parentKey] === parentId)
+	.map(item => {
+		let children = generateTree(data, item[childrenKey], childrenKey, parentKey, orderKey)
+		if (orderKey !== '') {
+			children = children.sort((a, b) => (a[orderKey] || 0) - (b[orderKey] || 0))
+		}
+		return {
+			...item,
+			...children.length && {
+				children
+			}
+		}
+	}).sort((a, b) => (orderKey !== '' ? ((a[orderKey] || 0) - (b[orderKey] || 0)) : 0))
 /**
  * 获取当前日期，如20190202
  * @param {String} separator 分隔符
  */
 export const getCurrentDate = (separator = '') => {
-  const oDate = new Date()
-  const yyyy = oDate.getFullYear()
-  let MM = oDate.getMonth() + 1
-  let dd = oDate.getDate()
-  if (MM < 10) {
-    MM = '0' + MM
-  }
-  if (dd < 10) {
-    dd = '0' + dd
-  }
-  return `${yyyy}${separator}${MM}${separator}${dd}`
+	const oDate = new Date()
+	const yyyy = oDate.getFullYear()
+	let MM = oDate.getMonth() + 1
+	let dd = oDate.getDate()
+	if (MM < 10) {
+		MM = '0' + MM
+	}
+	if (dd < 10) {
+		dd = '0' + dd
+	}
+	return `${yyyy}${separator}${MM}${separator}${dd}`
 }
 /**
  * 日期分割
@@ -329,28 +330,28 @@ export const getCurrentDate = (separator = '') => {
  * @param {string} separator
  */
 export const dateFormatBySeparator = (date, separator = '-') => {
-  if (!+date) return ''
-  if (String(date).length == 8) {
-    return (date + '').replace(/(\d{4})(\d{2})/, `$1${separator}$2${separator}`)
-  } else {
-    return timestampFormat(date, `YYYY${separator}MM${separator}DD`)
-  }
+	if (!+date) return ''
+	if (String(date).length == 8) {
+		return (date + '').replace(/(\d{4})(\d{2})/, `$1${separator}$2${separator}`)
+	} else {
+		return timestampFormat(date, `YYYY${separator}MM${separator}DD`)
+	}
 }
 
 export const timestampFormat = (timestamp, format = 'YYYY-MM-DD HH:mm:ss') => {
-  if (!+timestamp) return ''
-  return dayjs(+timestamp).format(format)
+	if (!+timestamp) return ''
+	return dayjs(+timestamp).format(format)
 }
 
 function numberRound(num, digit) {
-  const newNum = new Decimal(num)
-  const res = +newNum.toFixed(digit)
-  if (digit === 0) return res
-  const decimal = (res + '').split('.')[1]
-  if (!decimal || decimal && decimal.length < 2) {
-    return res.toFixed(2)
-  }
-  return res
+	const newNum = new Decimal(num)
+	const res = +newNum.toFixed(digit)
+	if (digit === 0) return res
+	const decimal = (res + '').split('.')[1]
+	if (!decimal || decimal && decimal.length < 2) {
+		return res.toFixed(2)
+	}
+	return res
 }
 
 /**
@@ -361,36 +362,37 @@ function numberRound(num, digit) {
  * @param {string, number} defaultVal 参数非法默认返回值
  */
 export const decimalsFormat = (digit, minDecimals = 2, maxDecimals = 2, defaultVal = 0) => {
-  // 非数值或者数值小于0.000000001
-  if (isNaN(digit) || digit === '') return defaultVal
-  if (!Number(digit) || digit > 0 && (digit * 100000000 < 1) || digit < 0 && (digit * 100000000 > -1)) return 0
-  const flVal = parseFloat(digit)
-  // 数值为整数
-  if (Number.isInteger(flVal)) return flVal.toFixed(minDecimals)
-  // 如果数值为科学计数法，则小数位已经达到8位
-  if (/e/.test(flVal)) {
-    return numberRound(flVal, maxDecimals)
-  }
-  const digitArr = (flVal + '').split('.')
-  const decimalPoint = digitArr[1]
+	// 非数值或者数值小于0.000000001
+	if (isNaN(digit) || digit === '') return defaultVal
+	if (!Number(digit) || digit > 0 && (digit * 100000000 < 1) || digit < 0 && (digit * 100000000 > -1)) return 0
+	const flVal = parseFloat(digit)
+	// 数值为整数
+	if (Number.isInteger(flVal)) return flVal.toFixed(minDecimals)
+	// 如果数值为科学计数法，则小数位已经达到8位
+	if (/e/.test(flVal)) {
+		return numberRound(flVal, maxDecimals)
+	}
+	const digitArr = (flVal + '').split('.')
+	const decimalPoint = digitArr[1]
 
-  if (decimalPoint.length < minDecimals) {
-    return numberRound(flVal, minDecimals)
-  } else if (decimalPoint.length > maxDecimals) {
-    let [newDigit, point] = (numberRound(flVal, maxDecimals) + '').split('.')
-    // 保留8位后，出现多余的填充0，进一步处理
-    point = point.replace(/(0+)$/, '').padEnd(minDecimals, '0')
-    return `${newDigit}.${point}`
-  } else {
-    return flVal
-  }
+	if (decimalPoint.length < minDecimals) {
+		return numberRound(flVal, minDecimals)
+	} else if (decimalPoint.length > maxDecimals) {
+		let [newDigit, point] = (numberRound(flVal, maxDecimals) + '').split('.')
+		// 保留8位后，出现多余的填充0，进一步处理
+		point = point.replace(/(0+)$/, '').padEnd(minDecimals, '0')
+		return `${newDigit}.${point}`
+	} else {
+		return flVal
+	}
 }
 
 export const thousandSeparator = (digit, minDecimals = 2) => {
-  if (isNaN(digit)) return 0
-  if (!+digit) return 0
-  const num = (numberRound(+digit, minDecimals)).toString().replace(/^-?\d+/g, m => m.replace(/(?=(?!\b)(\d{3})+$)/g, ','))
-  return num
+	if (isNaN(digit)) return 0
+	if (!+digit) return 0
+	const num = (numberRound(+digit, minDecimals)).toString().replace(/^-?\d+/g, m => m.replace(/(?=(?!\b)(\d{3})+$)/g,
+		','))
+	return num
 }
 // /**
 //  * 通过功能号和字典项key查找字典项值
@@ -408,7 +410,21 @@ export const thousandSeparator = (digit, minDecimals = 2) => {
 //   const res = Array.isArray(tempArr) && tempArr.filter(item => item.value == dictValue)
 //   return res.length && res[0].label || dictValue
 // }
-
+export const queryDictValueByKey = (dictCode, dictValue ) => {
+	let filterData = store.getters.filterData
+		if (filterData[dictCode] instanceof Array) {
+			return  getTargetData(filterData[dictCode], dictValue, "code")&&getTargetData(filterData[dictCode], dictValue, "code").name||""
+		} else {
+			for (let el in filterData[dictCode]) {
+				let name= getTargetData(filterData[key][el], dictValue, "code").name
+				if(name){
+					return name
+				}else{
+					return ""
+				}
+			}
+		}
+}
 // /**
 //  * 通过功能号和字典项值查找字典项KEY
 //  * @param {string} dictCode 字段项code
@@ -454,93 +470,93 @@ const fnToString = hasOwn.toString
 const ObjectFunctionString = fnToString.call(Object)
 
 const isPlainObject = (obj) => {
-  let proto, Ctor
-  if (!obj || toString.call(obj) !== '[object Object]') {
-    return false
-  }
-  proto = Object.getPrototypeOf(obj)
-  if (!proto) {
-    return true
-  }
-  Ctor = hasOwn.call(proto, 'constructor') && proto.constructor
-  return typeof Ctor === 'function' && fnToString.call(Ctor) === ObjectFunctionString
+	let proto, Ctor
+	if (!obj || toString.call(obj) !== '[object Object]') {
+		return false
+	}
+	proto = Object.getPrototypeOf(obj)
+	if (!proto) {
+		return true
+	}
+	Ctor = hasOwn.call(proto, 'constructor') && proto.constructor
+	return typeof Ctor === 'function' && fnToString.call(Ctor) === ObjectFunctionString
 }
 /**
  * 深拷贝
  * @param {array, object} target
  */
 export const deepAssign = function(target) {
-  const args = arguments
-  let result = {}
-  let i = 0
-  let argsLenth = args.length
-  let keys = null
-  let key = null
-  let src
-  let copy
-  let clone
-  let copyIsArray
-  let _parent = null
-  let parent = null
+	const args = arguments
+	let result = {}
+	let i = 0
+	let argsLenth = args.length
+	let keys = null
+	let key = null
+	let src
+	let copy
+	let clone
+	let copyIsArray
+	let _parent = null
+	let parent = null
 
-  if (argsLenth > 1) {
-    i = 1
-    result = target || {}
-  }
+	if (argsLenth > 1) {
+		i = 1
+		result = target || {}
+	}
 
-  if (toString.call(args[argsLenth - 1]) === '[object Object]' && args[argsLenth - 1].originalParent) {
-    _parent = parent = args[argsLenth - 1]
-    argsLenth--
-  }
-  // 该字段有父级则需要追溯该字段的父级
-  while (_parent) {
-    // 如果该字段引用了它的父级则为循环引用
-    if (_parent.originalParent === args[1]) {
-      // 循环引用直接返回同级的新对象
-      return _parent.currentParent
-    }
-    _parent = _parent.parent
-  }
-  for (; i < argsLenth; i++) {
-    keys = Object.keys(args[i])
-    for (let j = 0; j < keys.length; j++) {
-      key = keys[j]
-      src = result[key]
-      copy = args[i][key]
+	if (toString.call(args[argsLenth - 1]) === '[object Object]' && args[argsLenth - 1].originalParent) {
+		_parent = parent = args[argsLenth - 1]
+		argsLenth--
+	}
+	// 该字段有父级则需要追溯该字段的父级
+	while (_parent) {
+		// 如果该字段引用了它的父级则为循环引用
+		if (_parent.originalParent === args[1]) {
+			// 循环引用直接返回同级的新对象
+			return _parent.currentParent
+		}
+		_parent = _parent.parent
+	}
+	for (; i < argsLenth; i++) {
+		keys = Object.keys(args[i])
+		for (let j = 0; j < keys.length; j++) {
+			key = keys[j]
+			src = result[key]
+			copy = args[i][key]
 
-      if (src === copy) {
-        continue
-      }
-      if (copy && (isPlainObject(copy) ||
-          (copyIsArray = Array.isArray(copy)))) {
-        if (copyIsArray) {
-          copyIsArray = false
-          clone = src && Array.isArray(src) ? src : []
-        } else {
-          clone = src && (isPlainObject(src) ? src : {})
-        }
-        result[key] = deepAssign(clone, copy, {
-          originalParent: args[i],
-          currentParent: result,
-          parent: parent
-        })
-      } else if (copy !== undefined) {
-        result[key] = copy
-      }
-    }
-  }
+			if (src === copy) {
+				continue
+			}
+			if (copy && (isPlainObject(copy) ||
+					(copyIsArray = Array.isArray(copy)))) {
+				if (copyIsArray) {
+					copyIsArray = false
+					clone = src && Array.isArray(src) ? src : []
+				} else {
+					clone = src && (isPlainObject(src) ? src : {})
+				}
+				result[key] = deepAssign(clone, copy, {
+					originalParent: args[i],
+					currentParent: result,
+					parent: parent
+				})
+			} else if (copy !== undefined) {
+				result[key] = copy
+			}
+		}
+	}
 
-  return result
+	return result
 }
-export const sliceArrayGroup = (array, subGroupLength)=> {
-    var index = 0;
-    var newArray = [];
+export const sliceArrayGroup = (array, subGroupLength) => {
+	var index = 0;
+	var newArray = [];
 
-    while(index < array.length) {
-        newArray.push(array.slice(index, index += subGroupLength));
-    }
+	while (index < array.length) {
+		newArray.push(array.slice(index, index += subGroupLength));
+	}
 
-    return newArray;
+	return newArray;
 }
 
 /**
@@ -548,73 +564,73 @@ export const sliceArrayGroup = (array, subGroupLength)=> {
  * @param {String} money
  */
 export const amountDisplayedByChinese = money => {
-  const maxNum = 999999999999999.9999 // 最大处理的数字
+	const maxNum = 999999999999999.9999 // 最大处理的数字
 
-  const sdata = parseFloat(money)
-  if (sdata == 0) return '零元整'
-  if (!sdata || isNaN(sdata) || sdata >= maxNum) return ''
-  const cnNums = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖'] // 汉字的数字
-  const cnIntRadice = ['', '拾', '佰', '仟'] // 基本单位
-  const cnIntUnits = ['', '万', '亿', '兆'] // 对应整数部分扩展单位
-  const cnDecUnits = ['角', '分', '毫', '厘'] // 对应小数部分单位
-  const cnInteger = '整' // 整数金额时后面跟的字符
-  const cnIntLast = '元' // 整型完以后的单位
-  const cnPre = '负' // 负数
+	const sdata = parseFloat(money)
+	if (sdata == 0) return '零元整'
+	if (!sdata || isNaN(sdata) || sdata >= maxNum) return ''
+	const cnNums = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖'] // 汉字的数字
+	const cnIntRadice = ['', '拾', '佰', '仟'] // 基本单位
+	const cnIntUnits = ['', '万', '亿', '兆'] // 对应整数部分扩展单位
+	const cnDecUnits = ['角', '分', '毫', '厘'] // 对应小数部分单位
+	const cnInteger = '整' // 整数金额时后面跟的字符
+	const cnIntLast = '元' // 整型完以后的单位
+	const cnPre = '负' // 负数
 
-  let IntegerNum // 金额整数部分
-  let DecimalNum // 金额小数部分
-  let ChineseStr = '' // 输出的中文金额字符串
-  let parts // 分离金额后用的数组，预定义
+	let IntegerNum // 金额整数部分
+	let DecimalNum // 金额小数部分
+	let ChineseStr = '' // 输出的中文金额字符串
+	let parts // 分离金额后用的数组，预定义
 
-  money = sdata + '' // 转换为字符串
-  if (sdata < 0) {
-    ChineseStr += cnPre
-    money = money.substring(money.indexOf('-') + 1, money.length)
-  }
-  if (money.indexOf('.') == -1) {
-    IntegerNum = money
-    DecimalNum = ''
-  } else {
-    parts = money.split('.')
-    IntegerNum = parts[0]
-    DecimalNum = parts[1].substr(0, 2)
-  }
-  if (parseInt(IntegerNum, 10) > 0) { // 获取整型部分转换
-    let zeroCount = 0
-    const IntLen = IntegerNum.length
-    for (let i = 0; i < IntLen; i++) {
-      const n = IntegerNum.substr(i, 1)
-      const p = IntLen - i - 1
-      const q = p / 4
-      const m = p % 4
-      if (n == '0') {
-        zeroCount++
-      } else {
-        if (zeroCount > 0) {
-          ChineseStr += cnNums[0]
-        }
-        zeroCount = 0 // 归零
-        ChineseStr += cnNums[parseInt(n)] + cnIntRadice[m]
-      }
-      if (m == 0 && zeroCount < 4) {
-        ChineseStr += cnIntUnits[q]
-      }
-    }
-    ChineseStr += cnIntLast
-    // 整型部分处理完毕
-  }
-  if (DecimalNum != '') { // 小数部分
-    const decLen = DecimalNum.length
-    for (let i = 0; i < decLen; i++) {
-      const n = DecimalNum.substr(i, 1)
-      if (n != '0') {
-        ChineseStr += cnNums[Number(n)] + cnDecUnits[i]
-      }
-    }
-  } else {
-    ChineseStr += cnInteger
-  }
-  return ChineseStr
+	money = sdata + '' // 转换为字符串
+	if (sdata < 0) {
+		ChineseStr += cnPre
+		money = money.substring(money.indexOf('-') + 1, money.length)
+	}
+	if (money.indexOf('.') == -1) {
+		IntegerNum = money
+		DecimalNum = ''
+	} else {
+		parts = money.split('.')
+		IntegerNum = parts[0]
+		DecimalNum = parts[1].substr(0, 2)
+	}
+	if (parseInt(IntegerNum, 10) > 0) { // 获取整型部分转换
+		let zeroCount = 0
+		const IntLen = IntegerNum.length
+		for (let i = 0; i < IntLen; i++) {
+			const n = IntegerNum.substr(i, 1)
+			const p = IntLen - i - 1
+			const q = p / 4
+			const m = p % 4
+			if (n == '0') {
+				zeroCount++
+			} else {
+				if (zeroCount > 0) {
+					ChineseStr += cnNums[0]
+				}
+				zeroCount = 0 // 归零
+				ChineseStr += cnNums[parseInt(n)] + cnIntRadice[m]
+			}
+			if (m == 0 && zeroCount < 4) {
+				ChineseStr += cnIntUnits[q]
+			}
+		}
+		ChineseStr += cnIntLast
+		// 整型部分处理完毕
+	}
+	if (DecimalNum != '') { // 小数部分
+		const decLen = DecimalNum.length
+		for (let i = 0; i < decLen; i++) {
+			const n = DecimalNum.substr(i, 1)
+			if (n != '0') {
+				ChineseStr += cnNums[Number(n)] + cnDecUnits[i]
+			}
+		}
+	} else {
+		ChineseStr += cnInteger
+	}
+	return ChineseStr
 }
 
 // const userAgent = navigator.userAgent
@@ -663,24 +679,24 @@ export const amountDisplayedByChinese = money => {
  * @param {string} method 请求方式
  */
 export const formSubmit = (url = '', params = {}, method = 'post', target = '_self') => {
-  const formDom = document.createElement('form')
-  formDom.enctype = 'multipart/form-data'
-  formDom.action = url
-  formDom.method = method
-  formDom.target = target
-  formDom.style.display = 'none'
-  const inputNode = document.createElement('input')
-  Object.keys(params).map(key => {
-    const cloneNode = inputNode.cloneNode()
-    cloneNode.name = key
-    cloneNode.value = params[key]
-    formDom.appendChild(cloneNode)
-  })
-  inputNode.type = 'submit'
-  formDom.appendChild(inputNode)
-  document.body.appendChild(formDom)
-  formDom.submit()
-  document.body.removeChild(formDom)
+	const formDom = document.createElement('form')
+	formDom.enctype = 'multipart/form-data'
+	formDom.action = url
+	formDom.method = method
+	formDom.target = target
+	formDom.style.display = 'none'
+	const inputNode = document.createElement('input')
+	Object.keys(params).map(key => {
+		const cloneNode = inputNode.cloneNode()
+		cloneNode.name = key
+		cloneNode.value = params[key]
+		formDom.appendChild(cloneNode)
+	})
+	inputNode.type = 'submit'
+	formDom.appendChild(inputNode)
+	document.body.appendChild(formDom)
+	formDom.submit()
+	document.body.removeChild(formDom)
 }
 
 
@@ -690,10 +706,10 @@ export const formSubmit = (url = '', params = {}, method = 'post', target = '_se
  * @param {Object} formApi form对象
  */
 export const resetFormCreateFields = (ctx, formApi) => {
-  if (!formApi) return
-  ctx[formApi].fields().forEach(key => {
-    ctx[formApi].setValue(key, '')
-  })
+	if (!formApi) return
+	ctx[formApi].fields().forEach(key => {
+		ctx[formApi].setValue(key, '')
+	})
 }
 
 //  浏览器判断
@@ -745,14 +761,14 @@ export const resetFormCreateFields = (ctx, formApi) => {
 // }
 
 export const html2Escape = sHtml => {
-  return sHtml.replace(/[<>&"]/g, function(c) {
-    return {
-      '<': '&lt;',
-      '>': '&gt;',
-      '&': '&amp;',
-      '"': '&quot;'
-    }[c]
-  })
+	return sHtml.replace(/[<>&"]/g, function(c) {
+		return {
+			'<': '&lt;',
+			'>': '&gt;',
+			'&': '&amp;',
+			'"': '&quot;'
+		} [c]
+	})
 }
 /**
  *  转换对象指定属性类型
@@ -761,37 +777,37 @@ export const html2Escape = sHtml => {
  * @param {Object} transType 转换成什么类型,Integer,Float,String,Boolean
  */
 export const transObject = (obj, arrays, transType) => {
-  let targetObj = {}
-  switch (transType) {
-    case 'Integer':
-      Object.keys(obj).forEach(key => {
-        if (arrays.includes(key)) {
-          obj[key] = parseInt(obj[key])
-        }
-      })
-      targetObj = obj
-      break
-    case 'Float':
-      Object.keys(obj).forEach(key => {
-        if (arrays.includes(key)) {
-          obj[key] = parseFloat(obj[key])
-        }
-      })
-      targetObj = obj
-      break
-    case 'String':
-      Object.keys(obj).forEach(key => {
-        if (arrays.includes(key)) {
-          obj[key] = obj[key].toString()
-        }
-      })
-      targetObj = obj
-      break
-    default:
-      break
-  }
+	let targetObj = {}
+	switch (transType) {
+		case 'Integer':
+			Object.keys(obj).forEach(key => {
+				if (arrays.includes(key)) {
+					obj[key] = parseInt(obj[key])
+				}
+			})
+			targetObj = obj
+			break
+		case 'Float':
+			Object.keys(obj).forEach(key => {
+				if (arrays.includes(key)) {
+					obj[key] = parseFloat(obj[key])
+				}
+			})
+			targetObj = obj
+			break
+		case 'String':
+			Object.keys(obj).forEach(key => {
+				if (arrays.includes(key)) {
+					obj[key] = obj[key].toString()
+				}
+			})
+			targetObj = obj
+			break
+		default:
+			break
+	}
 
-  return targetObj
+	return targetObj
 }
 /**
  *  针对树形数组对象通过相应的唯一值查询相应的信息
@@ -800,22 +816,24 @@ export const transObject = (obj, arrays, transType) => {
  * @param {String} key 要查找的key
  */
 export const getTargetData = (arr, value, key) => {
-  arr.forEach(function(item) { // 利用foreach循环遍历
-    if (item[key] == value)// 判断递归结束条件
-    {
-      returnedItem = item
-      return item
-    } else if (item.children && item.children.length > 0) // 判断chlidren是否有数据
-    {
-      getTargetData(item.children, value, key) // 递归调用
-    }
-  })
-  return returnedItem
+	arr.forEach(function(item) { // 利用foreach循环遍历
+		if (item[key] == value) // 判断递归结束条件
+		{
+			returnedItem = item
+			return item
+		} else if (item.children && item.children.length > 0) // 判断chlidren是否有数据
+		{
+			getTargetData(item.children, value, key) // 递归调用
+		}
+	})
+	return returnedItem
 }
 
 export const openNewWindow = (path, query) => {
-  const url = `${path}?${objToUrl(query)}`
-  window.open(url, '', `height=${window.screen.availHeight - 60}, width=${window.screen.availWidth - 16}, toolbar=no, menubar=no, location=no, status=no`)
+	const url = `${path}?${objToUrl(query)}`
+	window.open(url, '',
+		`height=${window.screen.availHeight - 60}, width=${window.screen.availWidth - 16}, toolbar=no, menubar=no, location=no, status=no`
+	)
 }
 /**
  *  监听器
@@ -824,16 +842,16 @@ export const openNewWindow = (path, query) => {
  * @param {String} callback 回调函数
  */
 export const watcher = (obj, name, callback) => {
-  let value = obj[name];
-  if(value){
-    Object.defineProperty(obj, name, {
-      set: function(e) {
-        value = e;
-        callback && callback(e);
-      }.bind(this),
-      get: function() {
-        return value;
-      }.bind(this)
-    });
-  }
+	let value = obj[name];
+	if (value) {
+		Object.defineProperty(obj, name, {
+			set: function(e) {
+				value = e;
+				callback && callback(e);
+			}.bind(this),
+			get: function() {
+				return value;
+			}.bind(this)
+		});
+	}
 }

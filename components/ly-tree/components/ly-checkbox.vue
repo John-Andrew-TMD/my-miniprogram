@@ -104,8 +104,8 @@
 	.ly-checkbox__input.is-checked .ly-checkbox__inner,
 	.ly-radio__input.is-checked .ly-radio__inner,
 	.ly-checkbox__input.is-indeterminate .ly-checkbox__inner {
-		background-color: #409EFF;
-		border-color: #409EFF
+		background-color: #FF5948;
+		border-color: #FF5948
 	}
 	
 	.ly-checkbox__input.is-disabled+text.ly-checkbox__label,
@@ -122,12 +122,12 @@
 	
 	.ly-checkbox__input.is-checked+.ly-checkbox__label,
 	.ly-radio__input.is-checked+.ly-radio__label {
-		color: #409EFF
+		color: #FF5948
 	}
 	
 	.ly-checkbox__input.is-focus .ly-checkbox__inner,
 	.ly-radio__input.is-focus .ly-radio__inner {
-		border-color: #409EFF
+		border-color: #FF5948
 	}
 	
 	.ly-checkbox__input.is-indeterminate .ly-checkbox__inner::before {
@@ -155,8 +155,8 @@
 		border-radius: 4rpx;
 		-webkit-box-sizing: border-box;
 		box-sizing: border-box;
-		width: 28rpx;
-		height: 28rpx;
+		width: 35rpx;
+		height: 35rpx;
 		background-color: #FFF;
 		z-index: 1;
 		-webkit-transition: border-color .25s cubic-bezier(.71, -.46, .29, 1.46), background-color .25s cubic-bezier(.71, -.46, .29, 1.46);
@@ -177,13 +177,13 @@
 		border: 2rpx solid #FFF;
 		border-left: 0;
 		border-top: 0;
-		height: 14rpx;
-		left: 10rpx;
+		height: 20rpx;
+		left: 14rpx;
 		position: absolute;
 		top: 2rpx;
 		-webkit-transform: rotate(45deg) scaleY(0);
 		transform: rotate(45deg) scaleY(0);
-		width: 6rpx;
+		width: 4rpx;
 		-webkit-transition: -webkit-transform .15s ease-in .05s;
 		transition: -webkit-transform .15s ease-in .05s;
 		transition: transform .15s ease-in .05s;
